@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.min.css">
+    <!--FOR DROPDOWN-->
+    <link rel="stylesheet" href="../libs/itc/itc-custom-select.css">
+
+    <!--Add flicky-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+
+</head>
+<body>
+<div class="feedback__popup" id="feedback__popup">
+    <div class="feedback__popup-content">
+        <div class="feedback__cross" onclick="CloseFeedbackPopupForCross()">
+        </div>
+        <div class="form-titles">
+            <h3 class="form-title">Заполните контактные данные</h3>
+            <p class="form-subtitle">Пройди квиз, и будешь счастлив. Этот квиз предназначен для тех людей, которые любят проходить тесты!</p>
+        </div>
+
+        <form class="form-fields" enctype="multipart/form-data">
+            <div class="form-field">
+                <input type="text" id="first_name" name="first_name" required placeholder=" " pattern="[A-Za-z]{1,15}">
+                <label for="first_name">Ваше имя</label>
+                <!--<div class="requirements">
+                    The field can contain uppercase and lowercase letters, up to 15 characters.
+                </div>-->
+            </div>
+
+            <div class="form-field">
+                <input type="text" id="last_name" name="last_name" required placeholder=" " pattern="[A-Za-z]{1,15}">
+                <label for="last_name">Фамилия</label>
+                <!--     <div class="requirements">
+                         The field can contain uppercase and lowercase letters, up to 15 characters.
+                     </div>-->
+            </div>
+
+            <div class="form-field-comment">
+                <input type="text" id="comment" name="comment" required placeholder=" " pattern="[A-Za-z]{1,15}">
+                <label for="comment">Ваш комментарий</label>
+                <!--  <div class="requirements">
+                      The field can contain uppercase and lowercase letters, up to 15 characters.
+                  </div>-->
+                <div class="input__wrapper">
+                    <input name="file" type="file" id="input__file" class="input input__file" multiple>
+                    <label for="input__file" class="input__file-button">
+                        <span class="input__file-button-text">Приложить файлы</span>
+                        <img class="input__file-icon" src="../images/input_files_img.svg" alt="Выбрать файл" width="25">
+                    </label>
+                </div>
+            </div>
+
+
+
+            <p class="form-field-text">Этот квиз предназначен для тех людей, которые любят проходить тесты!</p>
+
+            <div class="form-buttons" >
+
+                <div class="form-buttons-btn">
+                    <input id="btn-radio-1" type="radio" name="radio" value="Не знаю" >
+                    <label for="btn-radio-1">Не знаю</label>
+                </div>
+
+                <div class="form-buttons-btn">
+                    <input id="btn-radio-2" type="radio" name="radio" value="Увидел это">
+                    <label for="btn-radio-2">Увидел это</label>
+                </div>
+
+                <div class="form-buttons-btn">
+                    <input id="btn-radio-3" type="radio" name="radio" value="Вон то">
+                    <label for="btn-radio-3">Вон то</label>
+                </div>
+
+
+
+                <div class="form-buttons-btn">
+                    <input id="btn-radio-4" type="radio" name="radio" value="Вон то">
+                    <label for="btn-radio-4">Вон то</label>
+                </div>
+
+                <div class="form-buttons-btn">
+                    <input id="btn-radio-5" type="radio" name="radio" value="Увидел это">
+                    <label for="btn-radio-5">Увидел это</label>
+                </div>
+
+                <div class="form-buttons-btn">
+                    <input id="btn-radio-6" type="radio" name="radio" value="Не знаю">
+                    <label for="btn-radio-6">Не знаю</label>
+                </div>
+            </div>
+
+            <button class="button form-button" onclick="CloseFeedbackPopupForButton()">Продолжить</button>
+        </form>
+
+    </div>
+</div>
+<div class="feedback__end" id="feedback__end">
+    <div class="feedback__end-content">
+        <div class="feedback__end-cross" onclick="CloseFeedbackEndPopup()"></div>
+
+        <img class="feedback__end-img" src="../images/feedback_end_image.png" alt="Smile">
+        <h3 class="feedback__end-title">Ваши данные Отправлены</h3>
+        <p class="feedback__end-text">Пройди квиз, и будешь счастлив. Этот квиз предназначен для тех людей, которые любят проходить тесты!</p>
+        <button class="feedback__end-button button" onclick="CloseFeedbackEndPopup()">Вернутся на сайт</button>
+    </div>
+
+</div>
+<header class="header" id="main">
+    <div class="header__top">
+        <!--logo-->
+        <div class="header__logo">
+            Super Quiz
+        </div>
+        <!--menu-->
+        <nav class="navbar-menu">
+            <ul class="header__menu" id="navbar">
+                <li class="header__menu-item active" ><a class="nav-link" href="/">Главная</a></li>
+                <li class="header__menu-item" ><a class="nav-link" href="#kviz">Квиз</a></li>
+                <li class="header__menu-item" ><a class="nav-link" href="#cards">Отзывы</a></li>
+                <li class="header__menu-item dropdown">
+                    <a class="nav-link" href="#">Не главная</a>
+                    <div class="dropdown-content">
+                        <a class="dropdown-content-item" href="#">Подпункт</a>
+                        <a class="dropdown-content-item" href="#">Ещё подпункт</a>
+                        <a class="dropdown-content-item" href="#">И ещё один подпункт</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+        <!-- feedback-->
+        <div class="header__feedback" >
+           <!-- feedback button-->
+            <div class="header__feedback-button button" onclick="OpenFeedbackPopup()" >
+                Связаться с нами
+            </div>
+            <!--social media-->
+            <div class="header__socialmedia" >
+                <div class="header__socialmedia-item header__tik-tok" onclick= "alert('Кнопка нажата')">
+                </div>
+
+                <div class="header__socialmedia-item header__vk" onclick= "alert('Кнопка нажата')">
+                </div>
+
+                <div class="header__socialmedia-item header__telegram" onclick= "alert('Кнопка нажата')" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header__titles">
+        <h1 class="header__titles-title">Это Супер-квиз!</h1>
+        <p class="header__title-text">
+            Пройди квиз, и будешь счастлив. Этот квиз предназначен для тех людей, которые любят проходить тесты!
+        </p>
+        <div class="header__title-button button">
+            <a href="#kviz">Пройти супер-квиз</a>
+        </div>
+    </div>
+</header>
+<section class="smiles">
+    <ul class="smiles__menu">
+        <li class="smiles__menu-item" >
+            <img class="smiles__menu-item-img" src="../images/smiles/smile1.png">
+            <span class="smiles__menu-item-text">Восхитительно</span>
+        </li>
+        <li class="smiles__menu-item" >
+            <img class="smiles__menu-item-img" src="../images/smiles/smile2.png">
+            <span class="smiles__menu-item-text">Лучше не бывает</span>
+        </li>
+        <li class="smiles__menu-item" >
+            <img class="smiles__menu-item-img" src="../images/smiles/smile3.png">
+            <span class="smiles__menu-item-text">В натуре четко!</span>
+        </li>
+        <li class="smiles__menu-item">
+            <img class="smiles__menu-item-img" src="../images/smiles/smile4.png">
+            <span class="smiles__menu-item-text">Где найти еще?</span>
+        </li>
+        <li class="smiles__menu-item">
+            <img class="smiles__menu-item-img" src="../images/smiles/smile5.png">
+            <span class="smiles__menu-item-text">Круто</span>
+        </li>
+    </ul>
+</section>
+
+<main>
+
+   <!-- SECTION KVIZ
+    page 1 | checkbox -->
+    <section class="kviz" id="kviz">
+        <div class="container">
+            <!-- page1 | checkbox-->
+            <div class="popup open-popup" id="popup">
+                <div class="kviz_outer">
+                    <div class="kviz__inner">
+                         <div class="kviz__popups">
+                            <div class="kviz__popup">
+                                <h3 class="kviz__popup-question">Какие виды тестов вам нравятся?</h3>
+                                <p class="kviz__popup-answer" id="answer"> </p>
+                            </div>
+                         </div>
+                         <div class="kviz__content">
+                            <div class="kviz__box">
+                                <h2 class="kviz__title">Какие виды тестов вам нравятся?</h2>
+                                <p class="kviz__text">
+                                    Многие из нас хоть раз попадались на эту
+                                    удочку — хочешь пройти всего один тест из интернета, и
+                                    вдруг понимаешь, что пролетело полдня.
+                                </p>
+                                <div class="kviz__menu">
+                                    <label class="checkbox-btn" >
+                                        <input id="tema1" type="checkbox" onclick="myFunction('tema1')">
+                                        <span id="text1">На темперамент</span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input  id="tema2" type="checkbox" onclick="myFunction('tema2')">
+                                        <span id="text2">Кто я из вселенной Марвел</span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input  id="tema3" type="checkbox" onclick="myFunction('tema3')">
+                                        <span id="text3">Увидел это</span>
+                                    </label>
+
+                                    <label class="checkbox-btn">
+                                        <input  id="tema4" type="checkbox" onclick="myFunction('tema4')">
+                                        <span id="text4">Мое тотемное животное</span>
+                                    </label>
+
+                                    <label class="checkbox-btn" >
+                                        <input id="tema5" type="checkbox" onclick="myFunction('tema5')">
+                                        <span id="text5">На IQ</span>
+                                    </label>
+                                    <label class="checkbox-btn">
+                                        <input  id="tema6" type="checkbox" onclick="myFunction('tema6')">
+                                        <span id="text6">На словарный запас</span>
+                                    </label>
+
+                                    <label class="checkbox-btn" >
+                                        <input id="tema7" type="checkbox" onclick="myFunction('tema7')">
+                                        <span id="text7">На логическое мышление</span>
+                                    </label>
+
+                                    <label class="checkbox-btn" >
+                                        <input id="tema8" type="checkbox" onclick="myFunction('tema8')">
+                                        <span id="text8">На уровень интеллекта</span>
+                                    </label>
+                                </div>
+                                <button class="kviz__btn button" onclick="closePopup()">Продолжить</button>
+
+                            </div>
+                            <div class="kviz__shadow1">
+                            </div>
+                            <div class="kviz__shadow2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--page 2 | radio -->
+            <div class="popup2" id="popup2">
+                <div class="kviz__inner">
+                    <div class="kviz__popups">
+                        <div class="kviz__popup no_select">
+                            <h3 class="kviz__popup-question">Какие виды тестов вам нравятся?</h3>
+                            <p class="kviz__popup-answer"></p>
+                        </div>
+                        <div class="kviz__popup2">
+                            <h3 class="kviz__popup2-question">Вы любите проходить тесты?</h3>
+                            <p class="kviz__popup2-answer"> </p>
+                        </div>
+                    </div>
+                    <div class="kviz__content">
+                        <div class="kviz__box">
+                            <h2 class="kviz__title">Вы любите проходить тесты?</h2>
+                            <p class="kviz__text">
+                                Нам важно узнать насолько часто Вы проходите тесты.
+                            </p>
+                            <div class="kviz__menu">
+                                <div class="form_radio_btn">
+                                    <input id="radio-1" type="radio" name="radio" value="Нет, я не никогда не прохожу тесты" >
+                                    <label for="radio-1">Нет, я не никогда не прохожу тесты</label>
+                                </div>
+
+                                <div class="form_radio_btn">
+                                    <input id="radio-2" type="radio" name="radio" value="Да, я прохожу все тесты">
+                                    <label for="radio-2">Да, я прохожу все тесты</label>
+                                </div>
+
+                                <div class="form_radio_btn">
+                                    <input id="radio-3" type="radio" name="radio" value="Заставляю себя проходить тесты">
+                                    <label for="radio-3">Заставляю себя проходить тесты</label>
+                                </div>
+
+                                <div class="form_radio_btn">
+                                    <input id="radio-4" type="radio" name="radio" value="Не люблю проходить тесты, но иногда приходится">
+                                    <label for="radio-4">Не люблю проходить тесты, но иногда приходится</label>
+                                </div>
+                            </div>
+
+                            <div class="buttons"></div>
+                            <button class="kviz__btn button previos-btn" onclick="closePopup_previos2()">Назад</button>
+                            <button class="kviz__btn button" onclick="closePopup2()">Продолжить</button>
+
+
+                        </div>
+                        <div class="kviz__shadow1">
+                        </div>
+                        <div class="kviz__shadow2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--page 3 | text field -->
+            <div class="popup3" id="popup3">
+                <div class="kviz__inner">
+                    <div class="kviz__popups">
+
+                        <div class="kviz__popup no_select">
+                            <h3 class="kviz__popup-question">Какие виды тестов вам нравятся?</h3>
+                            <p class="kviz__popup-answer"></p>
+                        </div>
+
+                        <div class="kviz__popup2 no_select">
+                            <h3 class="kviz__popup2-question">Вы любите проходить тесты?</h3>
+                            <p class="kviz__popup2-answer"></p>
+                        </div>
+
+                        <div class="kviz__popup3">
+                            <h3 class="kviz__popup3-question">Спасибо за ответы! Заполните форму ниже</h3>
+                        </div>
+
+                    </div>
+                    <div class="kviz__content">
+                        <div class="kviz__box">
+                            <img class="kviz__image-smiles" src="../images/kviz__img-smile.png" alt="Смайлы">
+                            <h2 class="kviz__title">Спасибо за ответы! Заполните форму ниже</h2>
+                            <p class="kviz__text">
+                                Ваше мнение важно для нас. Прикрепите фото с Вашей любимой картинкой и оставьте комментарий насколько понравился Вам тест.
+                            </p>
+                            <div class="kviz__menu">
+                                <div class="text-field">
+                                    <input class="text-field__input" type="text" name="login" id="login" placeholder="Ваше мнение сюда" value="">
+                                </div>
+                                <!--Dropdawn -->
+                                <div class="itc-select" id="select-1">
+                                    <!-- Кнопка для открытия выпадающего списка -->
+                                    <button type="button"  class="itc-select__toggle"  id="dropdown_btn" name="effect" value="Очень понравился" data-select="toggle" data-index="0">Очень понравился</button>
+                                    <!-- Выпадающий список -->
+                                    <div class="itc-select__dropdown" >
+                                        <ul class="itc-select__options" id="itc-select__dropdown" >
+                                            <li class="itc-select__option itc-select__option_selected" data-select="option" data-value="Очень понравился" data-index="0">Очень понравился</li>
+                                            <li class="itc-select__option" data-select="option" data-value="Не понравился" data-index="1">Не понравился</li>
+                                            <li class="itc-select__option" data-select="option" data-value="Пройду еще раз" data-index="2">Пройду еще раз</li>
+                                            <li class="itc-select__option" data-select="option" data-value="Посоветую пройти всем" data-index="3">Посоветую пройти всем</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buttons"></div>
+                            <button class="kviz__btn button previos-btn" onclick="closePopup_previos3()">Назад</button>
+                            <button class="kviz__btn button" onclick="closePopup3()">Продолжить</button>
+
+                        </div>
+                        <div class="kviz__shadow1">
+                        </div>
+                        <div class="kviz__shadow2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--SECTION CARDS-->
+    <section class="cards" id="cards">
+        <div class="container">
+            <!-- Flickity HTML init -->
+            <div class="gallery js-flickity"
+                 data-flickity-options='{ "freeScroll": true, "wrapAround": true }'>
+                <!--Card 1-->
+                <div class=" cards__menu-item cards__menu-item1 carousel-cell">
+                    <div class="users">
+                        <div class="users-photo">
+                            <img class="users-photo__img" src="../images/users/user1.png" alt="Андрей Пархимович">
+                        </div>
+                        <h3 class="users-name">Андрей Пархимович</h3>
+                        <p class="users-text">
+                            В целом, конечно, постоянное информационно-пропагандистское обеспечение нашей деятельности влечет за собой процесс внедрения и модернизации направлений прогрессивного развития.
+                        </p>
+                    </div>
+                </div>
+
+                <!--Card 2-->
+                <div class=" cards__menu-item cards__menu-item2 carousel-cell">
+                    <div class="users">
+                        <div class="users-photo">
+                            <img class="users-photo__img" src="../images/users/user2.png" alt="Тимур Никитенко">
+                        </div>
+                        <h3 class="users-name">Тимур Никитенко</h3>
+                        <p class="users-text">
+                            Господа, глубокий уровень погружения в значительной степени обусловливает важность
+                            глубокомысленных рассуждений.
+                        </p>
+                    </div>
+                </div>
+
+                <!--Card 3-->
+                <div class="cards__menu-item  cards__menu-item3 carousel-cell">
+                    <div class="users">
+                        <div class="users-photo">
+                            <img class="users-photo__img" src="../images/users/user3.png" alt="Артур Усович">
+                        </div>
+                        <h3 class="users-name">Артур Усович</h3>
+                        <p class="users-text">
+                            Задача организации, в особенности же убеждённость некоторых оппонентов
+                            предопределяет высокую востребованность благоприятных перспектив.
+                        </p>
+                    </div>
+                </div>
+
+                <!--Card 4-->
+                <div class="cards__menu-item cards__menu-item4 carousel-cell  ">
+                    <div class="users">
+                        <div class="users-photo">
+                            <img class="users-photo__img" src="../images/users/user4.png" alt="Егор Грей">
+                        </div>
+                        <h3 class="users-name">Егор Грей</h3>
+                        <p class="users-text">
+                            Разнообразный и богатый опыт говорит нам, что высокое качество позиционных исследований
+                            предопределяет высокую востребованность кластеризации усилий.
+                        </p>
+                    </div>
+                </div>
+
+                <!--Card 5-->
+                <div class=" cards__menu-item cards__menu-item2 carousel-cell">
+                    <div class="users">
+                        <div class="users-photo">
+                            <img class="users-photo__img" src="../images/users/user2.png" alt="Тимур Никитенко">
+                        </div>
+                        <h3 class="users-name">Тимур Никитенко</h3>
+                        <p class="users-text">
+                            Господа, глубокий уровень погружения в значительной степени обусловливает важность
+                            глубокомысленных рассуждений.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="footer" xmlns="http://www.w3.org/1999/html">
+    <div class="footer__inner">
+
+        <div class="footer__information">
+            <!--Contacts-->
+            <div class="footer__contacts">
+                <!--phone-->
+                <div class="footer__tel">
+                    <p class="footer__tel-name">Телефон</p>
+                    <p class="footer__tel-number">
+                        <a href="tel:+375123456789">+375 12 345 67 89</a>
+                    </p>
+                </div>
+                <!--email-->
+                <div class="footer__email">
+                    <p class="footer__email-name">Email</p>
+                    <p class="footer__email-address">
+                        <a href="ourmail@gmail.com">ourmail@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+            <!--Social media-->
+            <div class="footer__socialmedia">
+                <div class="footer__socialmedia-item footer__tik-tok" onclick= "alert('Кнопка нажата')">
+                </div>
+
+                <div class="footer__socialmedia-item footer__vk" onclick= "alert('Кнопка нажата')">
+                </div>
+
+                <div class="footer__socialmedia-item footer__telegram" onclick= "alert('Кнопка нажата')" >
+                </div>
+            </div>
+        </div>
+
+        <!--footer logo-->
+        <div class="footer__logo">
+            Super Quiz
+        </div>
+    </div>
+</footer>
+
+<!-- JS FOR DROPDOWN -->
+<script src="../libs/itc/itc-custom-select.js"></script>
+
+<!-- MAIN JS -->
+<script src="../js/main.min.js"></script>
+</body>
+</html>
